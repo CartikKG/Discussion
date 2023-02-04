@@ -1,8 +1,9 @@
-import React from "react";
+import React,{useContext} from "react";
+import Context from "../Context/context";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 
 export default function Allroutes() {
-  const user = localStorage.getItem("user");
-  return <>{user ? <Home /> : <Login />}</>;
+  const { isAuth, setisAuth } = React.useContext(Context);
+  return <>{isAuth ? <Home /> : <Login />}</>;
 }

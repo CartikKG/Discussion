@@ -1,26 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../Style/home.css";
-export default function Home() {
-  const user = JSON.parse(localStorage.getItem("user"));
+import { addUser, getUser, getComment } from "../api/api";
+import Context from "../Context/context";
+import Comment from "../Components/Comment";
 
+export default function Home() {
+  const { data, setData, setisAuth } = React.useContext(Context);
+  // console.log(Date())
+  const user = JSON.parse(localStorage.getItem("user"));
+  useEffect(
+    () => {},
+    getComment().then((res) => {
+      console.log(res);
+      // setData(res);
+    }),
+    []
+  );
   function addComment(event) {
     if (event.key === "Enter") {
       console.log();
-
       let obj = {
         title: event.target.value,
-        reply:[]
+        reply: [],
       };
     }
   }
+  const newLocal = "commentInput";
   return (
     <>
       <div style={{ width: "100%" }}>
         <button
-          style={{ background: "white", margin: "auto", padding: "7px" }}
+          style={{
+            background: "white",
+            margin: "auto",
+            padding: "7px",
+            borderRadius: "10px",
+            cursor: "pointer",
+          }}
           onClick={() => {
-            localStorage.clear();
-            window.reload();
+            setisAuth(false);
           }}
         >
           Logout
@@ -35,23 +53,24 @@ export default function Home() {
             width: "70%",
           }}
         >
-          <img
-            src={user.profile}
-            alt=""
-            style={{
-              width: "40px",
-              height: "50px",
-              borderRadius: "3px",
-              margin: "5px",
-            }}
-          />
+          <img src={user.userProfile} alt="" className="commentImg" />
           <input
             type="text"
+            className="commentInput"
             onKeyPress={addComment}
-            style={{ height: "30px", width: "100%" }}
             placeholder="Join the discussion..."
           />
         </label>
+        <div>
+          {data.map((el) => {
+            <Comment
+              img={el.userProfile}
+              name={el.username}
+              date="7 hour"
+              content={el.content}
+            />;
+          })}
+        </div>
       </div>
     </>
   );

@@ -1,24 +1,47 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../Style/Login.css";
+import { addUser, getUser } from "../api/api";
+import Context from "../Context/context";
 export default function Login() {
-  function saveUser() {
-    const name = document.getElementById("name").value;
-    const profile = document.getElementById("profile").value;
-    const email = document.getElementById("email").value;
-    if (name == "" || profile == "") {
-      alert("fill the details");
-    } else {
-      localStorage.setItem("user", JSON.stringify({ name, email, profile }));
-    }
+  const { setisAuth } = React.useContext(Context);
+  async function saveUser(event) {
+    event.preventDefault();
+    const username = document.getElementById("name").value;
+    const userProfile = document.getElementById("profile").value;
+    const useremail = document.getElementById("email").value;
+    let res = await addUser({ username, userProfile, useremail });
+    setisAuth(true);
+    localStorage.setItem(
+      "user",
+      JSON.stringify({ username, userProfile, useremail })
+    );
   }
   return (
-    <div>
+    <div id="login">
       <form action="">
         <h1> Go to Discussion</h1>
-        <input type="text" required placeholder="Enter Your Name" id="name" />
-        <input type="email" required placeholder="Enter Your Email" id="email" />
-        <input type="text" required placeholder="Enter Profile Url" id="profile" />
-        <input type="submit" onClick={saveUser} />
+        <input
+          className="Logininput"
+          type="text"
+          required
+          placeholder="Enter Your Name"
+          id="name"
+        />
+        <input
+          className="Logininput"
+          type="email"
+          required
+          placeholder="Enter Your Email"
+          id="email"
+        />
+        <input
+          className="Logininput"
+          type="text"
+          required
+          placeholder="Enter Profile Url"
+          id="profile"
+        />
+        <input type="submit" onClick={saveUser} id="submit" />
       </form>
     </div>
   );
