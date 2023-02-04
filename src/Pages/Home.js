@@ -37,6 +37,7 @@ export default function Home() {
             color: "white",
             backgroundColor: "black",
           }}
+          
           onClick={() => {
             setisAuth(false);
           }}
