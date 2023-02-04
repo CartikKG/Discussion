@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import "../Style/comment.css";
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
-const Comment = ({ img, content, name, date }) => {
+const Comment = ({data, setReply}) => {
   const [count, setCount] = useState(0);
   return (
     <div className="comment">
-      <img className="commentImg" src={img} alt="" />
+      <img className="commentImg" src={data.userProfile} alt="" />
       <div className="commentinner">
         <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-          <h4 style={{ color: "rgb(71 184 255)" }}>{name}</h4>
-          <p style={{ color: "grey", fontSize: "13px" }}>{date} </p>
+          <h4 style={{ color: "rgb(71 184 255)" }}>{data.username}</h4>
+          <p style={{ color: "grey", fontSize: "13px" }}>{data.date} </p>
         </div>
-        <div className="commentContent"> {content}</div>
+        <div className="commentContent"> {data.content}</div>
         <div style={{ display: "flex", alignItems: "center", gap: "3px" }}>
           <span style={{ fontSize: "15px" }}> {count}</span>
           <BiChevronUp
@@ -27,7 +27,7 @@ const Comment = ({ img, content, name, date }) => {
               setCount((pre) => pre - 1);
             }}
           />
-          <button className="btn">Reply</button>
+          <button className="btn" onClick={()=>{setReply(...data)}}>Reply</button>
           <button className="btn">Share</button>
         </div>
       </div>

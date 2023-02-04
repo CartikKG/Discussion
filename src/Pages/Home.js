@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../Style/home.css";
-import { addUser, getUser, getComment } from "../api/api";
+import { addUser, getUser, getComment, addComment,editComment } from "../api/api";
 import Context from "../Context/context";
 import Comment from "../Components/Comment";
 
 export default function Home() {
   const { data, setData, setisAuth } = React.useContext(Context);
+  const { replyOne, setReply } = useState({});
   const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
@@ -14,13 +15,11 @@ export default function Home() {
       setData(res);
     });
   }, []);
-  function addComment(event) {
+  async function addCom(event) {
     if (event.key === "Enter") {
-      console.log();
-      let obj = {
-        title: event.target.value,
-        reply: [],
-      };
+      await addComment({ ...user, content: event.target.value, reply: [] });
+      let res = await getComment();
+      setData(res);
     }
   }
   const newLocal = "commentInput";
@@ -37,7 +36,6 @@ export default function Home() {
             color: "white",
             backgroundColor: "black",
           }}
-          
           onClick={() => {
             setisAuth(false);
           }}
@@ -58,7 +56,7 @@ export default function Home() {
           <input
             type="text"
             className="commentInput"
-            onKeyPress={addComment}
+            onKeyPress={addCom}
             placeholder="Join the discussion..."
           />
         </label>
@@ -67,18 +65,16 @@ export default function Home() {
             return (
               <>
                 <Comment
-                  img={el.userProfile}
-                  name={el.username}
-                  date="7 hour"
-                  content={el.content}
+                 data={el}
+                 setReply={setReply}
+
                 />
-                <div style={{width:"90%",marginLeft:"8%"}}>
+                <div style={{ width: "90%", marginLeft: "8%" }}>
                   {el.reply.map((el) => {
                     return (
                       <Comment
-                        img={el.userProfile}
-                        name={el.username}
-                        content={el.content}
+                      data={el}
+                      setReply={setReply}
                       />
                     );
                   })}

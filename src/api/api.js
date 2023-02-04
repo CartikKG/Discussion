@@ -1,9 +1,10 @@
 async function addUser(data) {
   let allUser = await getUser();
-  // console.log(allUser)
   let flag = false;
   allUser.forEach((element) => {
     if (element.useremail == data.useremail) {
+      console.log(element)
+      localStorage.setItem('user',JSON.stringify(element))
       flag = true;
     }
   });
@@ -21,6 +22,36 @@ async function addUser(data) {
     } catch (error) {
       console.log(error);
     }
+  }
+}
+async function addComment(data) {
+  try {
+    let res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/comments`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    let res2 = await res.json();
+    console.log("Added Succesfully");
+  } catch (error) {
+    console.log(error);
+  }
+}
+async function editComment(data) {
+  try {
+    let res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/comments/${data.id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    let res2 = await res.json();
+    console.log("Added Succesfully");
+  } catch (error) {
+    console.log(error);
   }
 }
 async function getUser() {
@@ -41,4 +72,4 @@ async function getComment() {
     console.log(error);
   }
 }
-export { addUser,getUser,getComment };
+export { addUser, getUser, getComment,addComment,editComment };
