@@ -6,16 +6,14 @@ import Comment from "../Components/Comment";
 
 export default function Home() {
   const { data, setData, setisAuth } = React.useContext(Context);
-  // console.log(Date())
   const user = JSON.parse(localStorage.getItem("user"));
-  useEffect(
-    () => {},
+
+  useEffect(() => {
     getComment().then((res) => {
       console.log(res);
-      // setData(res);
-    }),
-    []
-  );
+      setData(res);
+    });
+  }, []);
   function addComment(event) {
     if (event.key === "Enter") {
       console.log();
@@ -32,10 +30,12 @@ export default function Home() {
         <button
           style={{
             background: "white",
-            margin: "auto",
+            margin: "10px",
             padding: "7px",
             borderRadius: "10px",
             cursor: "pointer",
+            color: "white",
+            backgroundColor: "black",
           }}
           onClick={() => {
             setisAuth(false);
@@ -63,12 +63,27 @@ export default function Home() {
         </label>
         <div>
           {data.map((el) => {
-            <Comment
-              img={el.userProfile}
-              name={el.username}
-              date="7 hour"
-              content={el.content}
-            />;
+            return (
+              <>
+                <Comment
+                  img={el.userProfile}
+                  name={el.username}
+                  date="7 hour"
+                  content={el.content}
+                />
+                <div style={{width:"90%",marginLeft:"8%"}}>
+                  {el.reply.map((el) => {
+                    return (
+                      <Comment
+                        img={el.userProfile}
+                        name={el.username}
+                        content={el.content}
+                      />
+                    );
+                  })}
+                </div>
+              </>
+            );
           })}
         </div>
       </div>

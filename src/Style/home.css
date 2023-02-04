@@ -1,7 +1,8 @@
 #home {
-  width: 100%;
+  width: 90%;
   margin: auto;
-  height: 500px;
+  /* height: 500px; */
+  /* border: 1px solid red; */
   /* background-color: rgb(188, 86, 86); */
 }
 .commentInput {
@@ -9,7 +10,6 @@
   font-size: 18px;
   height: 18px;
   width: 100%;
-
   border: 1px solid rgb(153, 153, 153);
   background-color: rgb(255, 255, 255);
 }

@@ -19,7 +19,8 @@
   flex-direction: column;
 }
 .commentImg {
-  width: 44px;
+  border: 1px solid rgb(239, 239, 239);
+  width: 48px;
   height: 45px;
   border-radius: 3px;
   margin: 10px;
