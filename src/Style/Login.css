@@ -1,0 +1,25 @@
+* {
+  margin: 0%;
+  padding: 0%;
+  background-color: black;
+  
+}
+form {
+  margin: auto;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+}
+input {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 7px;
+  border: 1px solid grey;
+  background-color: white;
+}
+h1{
+    color: white;
+    margin: auto;
+}
