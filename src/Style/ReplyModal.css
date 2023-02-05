@@ -1,6 +1,23 @@
-#replyModa{
-    display: none;
+#replyModa {
+  display: none;
 }
-#replyModal{
-    
+#replyModal {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.682);
+  width: 100%;
+  top: 0%;
+  left: 0%;
+  height: 100vh;
+}
+#replyModal > form {
+  position: relative;
+
+  top: 30%;
+}
+#replyModal input {
+  margin-top: 10px;
+  font-size: 16px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
 }

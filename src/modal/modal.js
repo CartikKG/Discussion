@@ -1,7 +1,7 @@
 export default function modalClick() {
-  if (document.getElementById("replymoda")) {
-    document.getElementById("replymoda").id = "replymodal";
+  if (document.getElementById("replyModa")) {
+    document.getElementById("replyModa").id = "replyModal";
   } else {
-    document.getElementById("replymodal").id = "replymoda";
+    document.getElementById("replyModal").id = "replyModa";
   }
 }

@@ -3,6 +3,7 @@ import "../Style/home.css";
 import { addUser, getUser, getComment, addComment,editComment } from "../api/api";
 import Context from "../Context/context";
 import Comment from "../Components/Comment";
+import ReplyModal from "../Components/ReplyModal";
 
 export default function Home() {
   const { data, setData, setisAuth } = React.useContext(Context);
@@ -84,6 +85,7 @@ export default function Home() {
           })}
         </div>
       </div>
+     <ReplyModal/>
     </>
   );
 }

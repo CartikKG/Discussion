@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../Style/comment.css";
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
+import modalClick from "../modal/modal";
 const Comment = ({data, setReply}) => {
   const [count, setCount] = useState(0);
   return (
@@ -27,7 +28,8 @@ const Comment = ({data, setReply}) => {
               setCount((pre) => pre - 1);
             }}
           />
-          <button className="btn" onClick={()=>{setReply(...data)}}>Reply</button>
+
+          <button className="btn" onClick={()=>{console.log(setReply); modalClick();}}>Reply</button>
           <button className="btn">Share</button>
         </div>
       </div>
