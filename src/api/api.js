@@ -3,7 +3,7 @@ async function addUser(data) {
   let flag = false;
   allUser.forEach((element) => {
     if (element.useremail == data.useremail) {
-      console.log(element)
+      // console.log(element)
       localStorage.setItem('user',JSON.stringify(element))
       flag = true;
     }

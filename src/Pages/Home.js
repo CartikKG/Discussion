@@ -11,7 +11,7 @@ export default function Home() {
 
   const user = JSON.parse(localStorage.getItem("user"));
   async function storeComments() {
-    console.log("kjkkj");
+    // console.log("kjkkj");
     let res = await getComment();
     setData(res);
   }

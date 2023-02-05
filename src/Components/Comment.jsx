@@ -10,7 +10,7 @@ const Comment = ({data, setReply,replyflg}) => {
       <div className="commentinner">
         <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
           <h4 style={{ color: "rgb(71 184 255)" }}>{data.username}</h4>
-          <p style={{ color: "grey", fontSize: "13px" }}>{data.date} </p>
+          <p style={{ color: "grey", fontSize: "13px" }}>{"  7 hours"} </p>
         </div>
         <div className="commentContent"> {data.content}</div>
         <div style={{ display: "flex", alignItems: "center", gap: "3px" }}>
