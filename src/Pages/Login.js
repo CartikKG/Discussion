@@ -18,7 +18,7 @@ export default function Login() {
   }
   return (
     <div id="login">
-      <form action="">
+      <form action="" onSubmit={saveUser}>
         <h1> Go to Discussion</h1>
         <input
           className="Logininput"
@@ -41,7 +41,7 @@ export default function Login() {
           placeholder="Enter Profile Url"
           id="profile"
         />
-        <input type="submit" onClick={saveUser} id="submit" />
+        <input type="submit"  id="submit" />
       </form>
     </div>
   );
