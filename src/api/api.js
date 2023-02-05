@@ -39,8 +39,8 @@ async function addComment(data) {
     console.log(error);
   }
 }
-async function editComment(data) {
-  try {
+async function replyAdd(data) {
+ try {
     let res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/comments/${data.id}`, {
       method: "PATCH",
       headers: {
@@ -72,4 +72,4 @@ async function getComment() {
     console.log(error);
   }
 }
-export { addUser, getUser, getComment,addComment,editComment };
+export { addUser, getUser, getComment,addComment,replyAdd };

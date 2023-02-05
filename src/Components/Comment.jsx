@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../Style/comment.css";
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
 import modalClick from "../modal/modal";
-const Comment = ({data, setReply}) => {
+const Comment = ({data, setReply,replyflg}) => {
   const [count, setCount] = useState(0);
   return (
     <div className="comment">
@@ -29,7 +29,7 @@ const Comment = ({data, setReply}) => {
             }}
           />
 
-          <button className="btn" onClick={()=>{console.log(setReply); modalClick();}}>Reply</button>
+          <button className="btn" onClick={()=>{setReply({...data}); modalClick();}} disabled={replyflg}>Reply</button>
           <button className="btn">Share</button>
         </div>
       </div>

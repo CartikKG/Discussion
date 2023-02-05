@@ -1,26 +1,30 @@
 import React, { useEffect, useState } from "react";
 import "../Style/home.css";
-import { addUser, getUser, getComment, addComment,editComment } from "../api/api";
+import { addUser, getUser, getComment, addComment } from "../api/api";
 import Context from "../Context/context";
 import Comment from "../Components/Comment";
 import ReplyModal from "../Components/ReplyModal";
 
 export default function Home() {
   const { data, setData, setisAuth } = React.useContext(Context);
-  const { replyOne, setReply } = useState({});
-  const user = JSON.parse(localStorage.getItem("user"));
+  const [replyOne, setReply] = useState({});
 
+  const user = JSON.parse(localStorage.getItem("user"));
+  async function storeComments() {
+    console.log("kjkkj");
+    let res = await getComment();
+    setData(res);
+  }
   useEffect(() => {
-    getComment().then((res) => {
-      console.log(res);
-      setData(res);
-    });
+    storeComments();
   }, []);
+
   async function addCom(event) {
     if (event.key === "Enter") {
       await addComment({ ...user, content: event.target.value, reply: [] });
       let res = await getComment();
       setData(res);
+      event.target.value="";
     }
   }
   const newLocal = "commentInput";
@@ -65,18 +69,11 @@ export default function Home() {
           {data.map((el) => {
             return (
               <>
-                <Comment
-                 data={el}
-                 setReply={setReply}
-
-                />
+                <Comment data={el} replyflg={false} setReply={setReply} />
                 <div style={{ width: "90%", marginLeft: "8%" }}>
                   {el.reply.map((el) => {
                     return (
-                      <Comment
-                      data={el}
-                      setReply={setReply}
-                      />
+                      <Comment replyflg={true} data={el} setReply={setReply} />
                     );
                   })}
                 </div>
@@ -85,7 +82,7 @@ export default function Home() {
           })}
         </div>
       </div>
-     <ReplyModal/>
+      <ReplyModal replyOne={replyOne} storeComments={storeComments} />
     </>
   );
 }
